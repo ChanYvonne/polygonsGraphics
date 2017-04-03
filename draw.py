@@ -6,7 +6,18 @@ def add_polygon( points, x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
     pass
 
 def draw_polygons( points, screen, color ):
-    pass
+    if len(matrix) < 3:
+        print 'Need at least 3 points to draw'
+        return
+    
+    vertex = 0
+    while vertex < len(matrix) - 1:
+        draw_line( int(points[vertex][0]),
+                   int(matrix[point][1]),
+                   int(matrix[point+1][0]),
+                   int(matrix[point+1][1]),
+                   screen, color)    
+        point+= 2
 
 def add_box( points, x, y, z, width, height, depth ):
     x1 = x + width
@@ -153,6 +164,11 @@ def draw_lines( matrix, screen, color ):
                    int(matrix[point+1][1]),
                    screen, color)    
         point+= 2
+
+def add_triangle(matrix, x0, y0, z0, x1, y1, z1, x2, y2, z2):
+    add_point(matrix, x0, y0, z0)
+    add_point(matrix, x1, y1, z1)
+    add_point(matrix, x2, y2, z2)
         
 def add_edge( matrix, x0, y0, z0, x1, y1, z1 ):
     add_point(matrix, x0, y0, z0)
