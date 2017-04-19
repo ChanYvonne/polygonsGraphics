@@ -146,9 +146,9 @@ def parse_file( fname, edges, transform, screen, color ):
             draw_polygons(edges, screen, color)
 
             if line == 'display':
-                display(screen)
+                save_ppm(screen, 'pic.ppm')
             else:
-                save_extension(screen, args[0])
+                save_ppm(screen, args[0])
             
         c+= 1
 
