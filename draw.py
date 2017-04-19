@@ -7,6 +7,12 @@ def add_polygon( points, x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
     add_point(points, x1, y1, z1)
     add_point(points, x2, y2, z2)
 
+def normal( x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
+    A = [x1-x0, y1-y0, z1-z0]
+    B = [x2-x1, y2-y1, z2-z1]
+    zN = A[0]*B[1]-A[1]*B[0]
+    return zN > 0
+        
 def draw_polygons( points, screen, color ):
     if len(points) < 3:
         print 'Need at least 3 points to draw'
@@ -14,21 +20,24 @@ def draw_polygons( points, screen, color ):
     
     vertex = 0
     while vertex < len(points) - 2:
-        draw_line( int(points[vertex][0]),
-                   int(points[vertex][1]),
-                   int(points[vertex+1][0]),
-                   int(points[vertex+1][1]),
-                   screen, color)
-        draw_line( int(points[vertex+1][0]),
-                   int(points[vertex+1][1]),
-                   int(points[vertex+2][0]),
-                   int(points[vertex+2][1]),
-                   screen, color)
-        draw_line( int(points[vertex+2][0]),
-                   int(points[vertex+2][1]),
-                   int(points[vertex][0]),
-                   int(points[vertex][1]),
-                   screen, color)    
+        if normal(points[vertex][0],points[vertex][1],points[vertex][2],
+                  points[vertex+1][0],points[vertex+1][1],points[vertex+1][2],
+                  points[vertex+2][0],points[vertex+2][1],points[vertex+2][2]):
+            draw_line( int(points[vertex][0]),
+                       int(points[vertex][1]),
+                       int(points[vertex+1][0]),
+                       int(points[vertex+1][1]),
+                       screen, color)
+            draw_line( int(points[vertex+1][0]),
+                       int(points[vertex+1][1]),
+                       int(points[vertex+2][0]),
+                       int(points[vertex+2][1]),
+                       screen, color)
+            draw_line( int(points[vertex+2][0]),
+                       int(points[vertex+2][1]),
+                       int(points[vertex][0]),
+                       int(points[vertex][1]),
+                       screen, color)    
         vertex+= 3
 
 def add_box( points, x, y, z, width, height, depth ):
@@ -123,15 +132,15 @@ def add_torus( edges, cx, cy, cz, r0, r1, step ):
             index = lat * num_steps + longt
 
             slong = longt_stop * num_steps
-            slat = lat_stop*num_steps
-            nindex = index+num_steps
+            slat = lat_stop * num_steps
+            nindex = index + num_steps
 
             x0 = points[index][0]
             y0 = points[index][1]
             z0 = points[index][2]
-            x1 = points[index+1][0]
-            y1 = points[index+1][1]
-            z1 = points[index+1][2]
+            x1 = points[(index+1)%slong][0]
+            y1 = points[(index+1)%slong][1]
+            z1 = points[(index+1)%slong][2]
             x2 = points[nindex%slat][0]
             y2 = points[nindex%slat][1]
             z2 = points[nindex%slat][2]
@@ -150,8 +159,6 @@ def generate_torus( cx, cy, cz, r0, r1, step ):
     rot_stop = num_steps
     circ_start = 0
     circ_stop = num_steps
-
-    print num_steps
     
     for rotation in range(rot_start, rot_stop):
         rot = step * rotation
