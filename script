@@ -1,12 +1,12 @@
 #test box mesh
 box
-0 0 0 200 100 400
+0 0 0 100 100 100
 ident
 rotate
 x 20
 rotate
 y 20
 move
-150 200 0
+150 150 0
 apply
 display

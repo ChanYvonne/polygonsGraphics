@@ -9,7 +9,7 @@ def add_polygon( points, x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
 
 def normal( x0, y0, z0, x1, y1, z1, x2, y2, z2 ):
     A = [x1-x0, y1-y0, z1-z0]
-    B = [x2-x1, y2-y1, z2-z1]
+    B = [x2-x0, y2-y0, z2-z0]
     zN = A[0]*B[1]-A[1]*B[0]
     return zN > 0
         
@@ -46,21 +46,34 @@ def add_box( points, x, y, z, width, height, depth ):
     z1 = z - depth
 
     #front-top-left
-    add_polygon(points, x1, y, z, x, y, z, x, y1, z)
+    '''add_polygon(points, x1, y, z, x, y, z, x, y1, z)
     add_polygon(points, x1, y, z, x, y1, z, x1, y1, z)
     add_polygon(points, x1, y, z1, x, y, z1, x, y, z)
     add_polygon(points, x1, y, z1, x, y, z, x1, y, z)
     add_polygon(points, x, y, z, x, y, z1, x, y1, z1)
-    add_polygon(points, x, y, z, x, y1, z1, x, y1, z)
-    
+    add_polygon(points, x, y, z, x, y1, z1, x, y1, z)'''
+
+    add_polygon(points, x, y, z, x, y1, z, x1, y1, z)
+    add_polygon(points, x1, y1, z, x1, y, z, x, y, z)
+    add_polygon(points, x, y, z1, x, y, z, x1, y, z)
+    add_polygon(points, x1, y, z, x1, y, z1, x, y, z1)
+    add_polygon(points, x, y, z1, x, y1, z1, x, y1, z)
+    add_polygon(points, x, y1, z, x, y, z, x, y, z1)     
 
     #back-bottom-right
-    add_polygon(points, x1, y, z1, x, y, z1, x, y1, z1)
+    '''add_polygon(points, x1, y, z1, x, y, z1, x, y1, z1)
     add_polygon(points, x1, y, z1, x, y1, z1, x1, y1, z1)
     add_polygon(points, x1, y1, z1, x, y1, z1, x, y1, z)
     add_polygon(points, x1, y1, z1, x, y1, z, x1, y1, z)
     add_polygon(points, x1, y, z1, x1, y, z, x1, y1, z)
-    add_polygon(points, x1, y, z1, x1, y1, z, x1, y1, z1)
+    add_polygon(points, x1, y, z1, x1, y1, z, x1, y1, z1)'''
+    
+    add_polygon(points, x1, y1, z1, x1, y1, z, x, y1, z)
+    add_polygon(points, x, y1, z, x, y1, z1, x1, y1, z1)
+    add_polygon(points, x1, y, z, x1, y1, z, x1, y1, z1)
+    add_polygon(points, x1, y1, z1, x1, y, z1, x1, y, z)
+    add_polygon(points, x1, y, z1, x1, y1, z1, x, y1, z1)
+    add_polygon(points, x, y1, z1, x, y, z1, x1, y, z1)
     
 def add_sphere( edges, cx, cy, cz, r, step ):
     points = generate_sphere(cx, cy, cz, r, step)
