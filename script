@@ -1,33 +1,21 @@
-box
-0 0 0 50 50 100
-ident
+#BODY
+push
 rotate
-x 20
-rotate
-y 20
-move
--25 -20 0
-apply
-display
-sphere
-0 0 0 100
-ident
-rotate
-x 10
-rotate
-y 20
-rotate
-z 70
-apply
-display
-torus
-0 0 0 20 225
-ident
-rotate
-x 40
+y -30
 move
 250 250 0
-apply
+box
+-100 125 50 200 250 100
+#HEAD
+push
+rotate
+y 90
+move
+0 175 0
+sphere
+0 0 0 50
+pop
+push
 display
 
 
