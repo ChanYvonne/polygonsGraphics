@@ -76,6 +76,7 @@ def parse_file( fname, edges, transform, screen, color ):
         if line == 'push':
             newStack = stack[-1][:]
             stack.append(newStack)
+            print stack
             #print stack[-1]
             
         elif line == 'pop':
@@ -165,6 +166,7 @@ def parse_file( fname, edges, transform, screen, color ):
                 t = make_rotY(theta)
             else:
                 t = make_rotZ(theta)
+            print stack[-1]
             matrix_mult(stack[-1], t)
             stack[-1] = t
             print stack[-1]
