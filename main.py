@@ -76,11 +76,11 @@ def parse_file( fname, edges, transform, screen, color ):
         if line == 'push':
             newStack = stack[-1][:]
             stack.append(newStack)
-            print stack[-1]
+            #print stack[-1]
             
         elif line == 'pop':
             stack.pop()
-            print stack[-1]
+            #print stack[-1]
             
         elif line == 'sphere':
             #print 'SPHERE\t' + str(args)
@@ -150,8 +150,10 @@ def parse_file( fname, edges, transform, screen, color ):
         elif line == 'move':
             #print 'MOVE\t' + str(args)
             t = make_translate(float(args[0]), float(args[1]), float(args[2]))
+            print stack[-1]
             matrix_mult(stack[-1], t)
             stack[-1] = t
+            print stack[-1]
 
         elif line == 'rotate':
             #print 'ROTATE\t' + str(args)
@@ -165,6 +167,7 @@ def parse_file( fname, edges, transform, screen, color ):
                 t = make_rotZ(theta)
             matrix_mult(stack[-1], t)
             stack[-1] = t
+            print stack[-1]
                 
         elif line == 'clear':
             edges = []
