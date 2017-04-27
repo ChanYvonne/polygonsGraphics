@@ -15,7 +15,12 @@ move
 sphere
 0 0 0 50
 pop
+#LEFT ARM
 push
+move
+-100 125 0
+rotate
+x -45
+box
+-40 0 40 40 100 80
 display
-
-
