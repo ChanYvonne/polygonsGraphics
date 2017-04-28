@@ -3,6 +3,7 @@ from draw import *
 from parser import *
 from matrix import *
 import math
+import copy
 
 screen = new_screen()
 color = [ 0, 255, 255 ]
@@ -55,12 +56,12 @@ See the file script for an example of the file format
 ARG_COMMANDS = [ 'line', 'scale', 'move', 'rotate', 'save', 'circle', 'bezier', 'hermite', 'box', 'sphere', 'torus', 'push', 'pop' ]
 
 def parse_file( fname, edges, transform, screen, color ):
-
+    
     f = open(fname)
     lines = f.readlines()
     m = new_matrix()
     ident(m)
-    stack = [m]
+    stack = [m[:]]
     
     step = 0.1
     c = 0
@@ -74,8 +75,10 @@ def parse_file( fname, edges, transform, screen, color ):
             #print 'args\t' + str(args)
 
         if line == 'push':
-            newStack = stack[-1][:]
-            stack.append(newStack)
+            current_top = copy.copy(stack[-1])
+            stack.append(current_top)
+            #newStack = stack[-1][:]
+            #stack.append(newStack)
             print stack
             #print stack[-1]
             
@@ -187,6 +190,5 @@ def parse_file( fname, edges, transform, screen, color ):
             save_ppm(screen, args[0])
             
         c+= 1
-
 
 parse_file( 'script', edges, transform, screen, color )
